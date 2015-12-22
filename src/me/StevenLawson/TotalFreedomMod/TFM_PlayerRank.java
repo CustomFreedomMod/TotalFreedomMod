@@ -1,22 +1,24 @@
 package me.StevenLawson.TotalFreedomMod;
 
 import me.StevenLawson.TotalFreedomMod.Config.TFM_ConfigEntry;
-import static me.StevenLawson.TotalFreedomMod.TFM_Util.DEVELOPERS;
+import static me.StevenLawson.TotalFreedomMod.TFM_Util.*;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public enum TFM_PlayerRank
 {
-    DEVELOPER("a " + ChatColor.DARK_PURPLE + "Developer", ChatColor.DARK_PURPLE + "[Dev]"),
-    IMPOSTOR("an " + ChatColor.YELLOW + ChatColor.UNDERLINE + "Impostor", ChatColor.YELLOW.toString() + ChatColor.UNDERLINE + "[IMP]"),
+    DEVELOPER("a " + ChatColor.DARK_PURPLE + "Developer", "§8(§5Dev§8) §c"),
+    IMPOSTOR("an " + ChatColor.YELLOW + ChatColor.UNDERLINE + "Impostor", "§8(§e§nIMP§8) §f"),
     NON_OP("a " + ChatColor.GREEN + "Non-OP", ChatColor.GREEN.toString()),
-    OP("an " + ChatColor.RED + "OP", ChatColor.RED + "[OP]"),
-    SUPER("a " + ChatColor.GOLD + "Super Admin", ChatColor.GOLD + "[SA]"),
-    TELNET("a " + ChatColor.DARK_GREEN + "Super Telnet Admin", ChatColor.DARK_GREEN + "[STA]"),
-    SENIOR("a " + ChatColor.LIGHT_PURPLE + "Senior Admin", ChatColor.LIGHT_PURPLE + "[SrA]"),
-    OWNER("the " + ChatColor.BLUE + "Owner", ChatColor.BLUE + "[Owner]"),
-    CONSOLE("The " + ChatColor.DARK_PURPLE + "Console", ChatColor.DARK_PURPLE + "[Console]");
+    OP("an " + ChatColor.RED + "OP", "§8(§cOP§8)§c"),
+    SUPER("a " + ChatColor.GOLD + "Super Admin", "§8(§bSA§8) §c"),
+    TELNET("a " + ChatColor.DARK_GREEN + "Super Telnet Admin", "§8(§2STA§8) §c"),
+    SENIOR("a " + ChatColor.LIGHT_PURPLE + "Senior Admin", "§8(§dSrA§8) §c"),
+    OWNER("the " + ChatColor.BLUE + "Owner", "§8)§9Owner§8) §c"),
+    SYSTEM("a " + ChatColor.DARK_GREEN + "System Administrator" + ChatColor.AQUA + "!", "§8(§4Sys-Admin§8) §c"),
+    EXEC("an " + ChatColor.BLUE + "Executive" + ChatColor.AQUA + "!", "§8(§1Exec§8) §c"),
+    CONSOLE("The " + ChatColor.DARK_PURPLE + "Console", "§8(§5Console§8) §c");
     private final String loginMessage;
     private final String prefix;
 
@@ -68,6 +70,16 @@ public enum TFM_PlayerRank
         if (DEVELOPERS.contains(sender.getName()))
         {
             return DEVELOPER;
+        }
+        
+        if (SYSTEMS.contains(sender.getName()))
+        {
+            return SYSTEM;
+        }
+        
+        if (EXECUTIVES.contains(sender.getName()))
+        {
+            return EXEC;
         }
 
         final TFM_Admin entry = TFM_AdminList.getEntryByIp(TFM_Util.getIp((Player) sender));
